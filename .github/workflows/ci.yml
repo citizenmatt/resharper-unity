@@ -8,9 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Dump env context
-        env:
-          ENV_CONTEXT: ${{ toJson(env) }}
-        run: write-host "$env:ENV_CONTEXT1"
+        shell: cmd
+        run: env
       - name: Cache Build JVM
         id: cache-gradle-jvm
         uses: actions/cache@v2
@@ -38,7 +37,7 @@ jobs:
           path: ~/JetTestPackages
           key: ${{ runner.os }}-jet-test-packages-no-hash1
       - name: Dump Gradle
-        run: tree ${{ env.HOME }}/.gradle
+        run: tree C:\Users\runneradmin\.gradle
       - name: Build and Run Tests
         shell: powershell
         run: powershell -File .\build.ps1 -RunTests -Verbose
