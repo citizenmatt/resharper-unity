@@ -35,13 +35,19 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/JetTestPackages
-          key: ${{ runner.os }}-jet-test-packages-no-hash1
+          key: ${{ runner.os }}-jet-test-packages-no-hash2
       - name: Dump Gradle
-        run: tree C:\Users\runneradmin\.gradle
+        run: tree C:\Users\runneradmin\.gradle /f /a
+      - name: Dump build dir
+        run: tree rider\build /f /a
       - name: Build and Run Tests
         shell: powershell
         run: powershell -File .\build.ps1 -RunTests -Verbose
         env:
-          JET_TEST_PACKAGES_DIR: ${{ env.HOME }}/JetTestPackages
+          JET_TEST_PACKAGES_DIR: ${{ env.HOMEDRIVE }}${{ env.HOMEPATH }}/JetTestPackages
       - name: Stop gradle daemons
         run: rider/gradlew.bat --stop
+      - name: Dump Gradle 2
+        run: tree C:\Users\runneradmin\.gradle /f /a
+      - name: Dump build dir 2
+        run: tree rider\build /f /a
