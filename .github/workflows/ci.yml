@@ -2,6 +2,9 @@ name: CI
 
 on: [pull_request]
 
+env:
+  JET_DISTRIBUTED_CACHE_ENABLED: false
+
 jobs:
   windows:
     runs-on: windows-latest
@@ -55,3 +58,11 @@ jobs:
         run: tree rider\build /f /a
       - name: Dump JetTestPackages
         run: tree C:\Users\runneradmin\JetTestPackages
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        shell: bash
+        run: ./build.sh --info --stacktrace
+
