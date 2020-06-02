@@ -51,5 +51,5 @@ jobs:
         run: tree C:\Users\runneradmin\.gradle /f /a
       - name: Dump build dir 2
         run: tree rider\build /f /a
-      - nane: Dump JetTestPackages
+      - name: Dump JetTestPackages
         run: tree C:\Users\runneradmin\JetTestPackages
