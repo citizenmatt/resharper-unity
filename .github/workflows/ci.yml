@@ -28,14 +28,16 @@ jobs:
         with:
           path: |
             ~/.gradle/caches
-            !~/.gradle/caches/**/com.jetbrains.intellij.rider/**/*
-          key: ${{ runner.os }}-gradle-test1-${{ hashFiles('rider/**/?*.gradle*') }}
+            !~/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea
+            !~/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.rider
+          key: ${{ runner.os }}-gradle-test2-${{ hashFiles('rider/**/?*.gradle*') }}
       - name: Cache test packages
         id: cache-test-packages
         uses: actions/cache@v2
         with:
           path: ~/JetTestPackages
-          key: ${{ runner.os }}-jet-test-packages-no-hash3
+          key: ${{ runner.os }}-jet-test-packages-${{ hashFiles('~/JetTestPackages/**/*.nupkg') }}
+          restore-keys: ${{ runner.os }}-jet-test-packages-
       - name: Dump Gradle
         run: tree C:\Users\runneradmin\.gradle /f /a
       - name: Dump build dir
